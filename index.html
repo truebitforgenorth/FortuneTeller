@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oracle of the Last Moon</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="sky sky-a" aria-hidden="true"></div>
+    <div class="sky sky-b" aria-hidden="true"></div>
+    <div class="mist mist-a" aria-hidden="true"></div>
+    <div class="mist mist-b" aria-hidden="true"></div>
+
+    <main class="app-shell">
+      <section class="hero">
+        <p class="eyebrow">Carnival of Final Prophecies</p>
+        <h1>Oracle of the Last Moon</h1>
+        <p class="intro">
+          Peer into the crystal ball and receive a fictional doom reading wrapped
+          in velvet, smoke, and terrible luck.
+        </p>
+      </section>
+
+      <section class="stage" aria-label="Fortune teller stage">
+        <div class="curtain curtain-left" aria-hidden="true"></div>
+        <div class="curtain curtain-right" aria-hidden="true"></div>
+
+        <div class="orbital-ring orbital-ring-a" aria-hidden="true"></div>
+        <div class="orbital-ring orbital-ring-b" aria-hidden="true"></div>
+
+        <div class="crystal-area">
+          <div class="crystal-base" aria-hidden="true"></div>
+          <button class="crystal-ball" id="fortuneButton" type="button">
+            <span class="ball-core"></span>
+            <span class="ball-glow"></span>
+            <span class="ball-text">
+              <span class="ball-title">Summon Your Fortune</span>
+              <span class="ball-subtitle">One click closer to dread</span>
+            </span>
+          </button>
+        </div>
+
+        <article class="fortune-card" id="fortuneCard" aria-live="polite">
+          <p class="fortune-label">Tonight's reading</p>
+          <p class="fortune-timeline" id="timelineText">
+            The veil is quiet. Touch the crystal ball.
+          </p>
+          <p class="fortune-cause" id="causeText">
+            The spirits are still deciding which spectacularly bad idea belongs
+            to you.
+          </p>
+          <p class="fortune-note">
+            Entertainment only. The oracle is dramatic, not licensed.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

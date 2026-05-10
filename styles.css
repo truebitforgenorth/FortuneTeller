@@ -1,0 +1,596 @@
+:root {
+  --bg-night: #09030f;
+  --bg-plum: #1f0f2c;
+  --bg-wine: #461536;
+  --mist: rgba(235, 222, 255, 0.08);
+  --gold: #dfbb67;
+  --soft-gold: #f4dca7;
+  --candle: #ffd58f;
+  --card: rgba(28, 14, 35, 0.84);
+  --card-border: rgba(244, 220, 167, 0.24);
+  --text-main: #f8f0ff;
+  --text-soft: #d7c7e6;
+  --accent: #ff7b7b;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: "Book Antiqua", "Palatino Linotype", Palatino, Georgia, serif;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255, 202, 127, 0.1), transparent 26%),
+    radial-gradient(circle at 80% 10%, rgba(181, 107, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 50% 110%, rgba(255, 87, 127, 0.16), transparent 32%),
+    linear-gradient(180deg, #140816 0%, var(--bg-night) 42%, #040208 100%);
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  background:
+    radial-gradient(circle at 12% 30%, rgba(255, 255, 255, 0.95) 0 1px, transparent 1.4px),
+    radial-gradient(circle at 24% 72%, rgba(255, 255, 255, 0.78) 0 1.2px, transparent 1.6px),
+    radial-gradient(circle at 68% 22%, rgba(255, 255, 255, 0.9) 0 1.1px, transparent 1.5px),
+    radial-gradient(circle at 88% 63%, rgba(255, 255, 255, 0.8) 0 1.4px, transparent 1.8px),
+    radial-gradient(circle at 48% 48%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1.4px),
+    radial-gradient(circle at 78% 84%, rgba(255, 255, 255, 0.78) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 35% 16%, rgba(255, 255, 255, 0.72) 0 1px, transparent 1.4px),
+    radial-gradient(circle at 56% 86%, rgba(255, 255, 255, 0.8) 0 1.3px, transparent 1.8px);
+  opacity: 0.9;
+  animation: shimmer 8s linear infinite;
+}
+
+body::after {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0, transparent 15%, transparent 85%, rgba(255, 255, 255, 0.03) 100%),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.015) 0 16px,
+      rgba(0, 0, 0, 0.02) 16px 32px
+    );
+  mix-blend-mode: screen;
+  opacity: 0.45;
+}
+
+.sky,
+.mist {
+  position: fixed;
+  inset: -10%;
+  pointer-events: none;
+}
+
+.sky {
+  opacity: 0.3;
+  filter: blur(60px);
+}
+
+.sky-a {
+  background: radial-gradient(circle at 30% 30%, rgba(162, 76, 196, 0.18), transparent 30%);
+  animation: drift 14s ease-in-out infinite alternate;
+}
+
+.sky-b {
+  background: radial-gradient(circle at 72% 40%, rgba(255, 109, 122, 0.14), transparent 30%);
+  animation: drift 18s ease-in-out infinite alternate-reverse;
+}
+
+.mist {
+  background:
+    radial-gradient(circle at 30% 70%, var(--mist), transparent 35%),
+    radial-gradient(circle at 75% 45%, rgba(255, 255, 255, 0.06), transparent 28%);
+  filter: blur(80px);
+}
+
+.mist-a {
+  animation: mistRoll 16s ease-in-out infinite;
+}
+
+.mist-b {
+  animation: mistRoll 20s ease-in-out infinite reverse;
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  gap: 2rem;
+  padding: 2.5rem 1.25rem 3rem;
+}
+
+.hero {
+  width: min(720px, 100%);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.25rem;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  color: var(--soft-gold);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.7rem, 7vw, 5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  text-shadow: 0 0 30px rgba(255, 218, 163, 0.15);
+}
+
+.intro {
+  width: min(620px, 100%);
+  margin: 1rem auto 0;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+
+.stage {
+  position: relative;
+  width: min(980px, 100%);
+  padding: 4rem 1.5rem 2rem;
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(91, 24, 55, 0.16), rgba(16, 8, 22, 0.62)),
+    radial-gradient(circle at top, rgba(255, 196, 134, 0.08), transparent 38%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 22%;
+  background:
+    linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.32)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(57, 18, 25, 0.8) 0 20px,
+      rgba(82, 23, 36, 0.92) 20px 40px
+    );
+  opacity: 0.8;
+}
+
+.curtain {
+  position: absolute;
+  top: 0;
+  width: 24%;
+  height: 100%;
+  background:
+    linear-gradient(90deg, rgba(58, 8, 20, 0.96), rgba(124, 16, 45, 0.88)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.06) 0 18px,
+      rgba(0, 0, 0, 0.05) 18px 36px
+    );
+  filter: drop-shadow(0 0 18px rgba(0, 0, 0, 0.25));
+}
+
+.curtain-left {
+  left: -4%;
+  transform: perspective(400px) rotateY(16deg);
+  border-radius: 0 24px 24px 0;
+}
+
+.curtain-right {
+  right: -4%;
+  transform: perspective(400px) rotateY(-16deg);
+  border-radius: 24px 0 0 24px;
+}
+
+.orbital-ring {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  border: 1px solid rgba(244, 220, 167, 0.14);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.orbital-ring-a {
+  width: 380px;
+  height: 150px;
+  animation: spinRing 18s linear infinite;
+}
+
+.orbital-ring-b {
+  width: 280px;
+  height: 280px;
+  border-color: rgba(173, 141, 228, 0.12);
+  animation: spinRing 24s linear infinite reverse;
+}
+
+.crystal-area {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding-top: 1rem;
+}
+
+.crystal-base {
+  position: absolute;
+  bottom: -22px;
+  width: 220px;
+  height: 64px;
+  border-radius: 50%;
+  background:
+    linear-gradient(180deg, #4e1f33, #1a0b16),
+    radial-gradient(circle at 50% 40%, rgba(255, 221, 173, 0.18), transparent 55%);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.45);
+}
+
+.crystal-ball {
+  position: relative;
+  width: min(360px, 75vw);
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: inherit;
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.26) 0 6%, transparent 9%),
+    radial-gradient(circle at 38% 34%, rgba(255, 255, 255, 0.08), transparent 14%),
+    radial-gradient(circle at 48% 42%, rgba(251, 191, 95, 0.14), transparent 24%),
+    radial-gradient(circle at 50% 50%, rgba(98, 53, 164, 0.62), rgba(18, 14, 43, 0.94) 60%, rgba(6, 5, 15, 1) 100%);
+  box-shadow:
+    inset 0 0 32px rgba(255, 255, 255, 0.1),
+    inset 0 -24px 52px rgba(0, 0, 0, 0.44),
+    0 0 50px rgba(152, 113, 255, 0.2),
+    0 18px 40px rgba(0, 0, 0, 0.35);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.crystal-ball:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    inset 0 0 32px rgba(255, 255, 255, 0.1),
+    inset 0 -24px 52px rgba(0, 0, 0, 0.44),
+    0 0 70px rgba(224, 176, 255, 0.26),
+    0 28px 45px rgba(0, 0, 0, 0.4);
+}
+
+.crystal-ball:focus-visible {
+  outline: 2px solid rgba(255, 223, 149, 0.9);
+  outline-offset: 8px;
+}
+
+.ball-core,
+.ball-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.ball-core {
+  background:
+    radial-gradient(circle at 50% 62%, rgba(255, 122, 122, 0.16), transparent 26%),
+    radial-gradient(circle at 50% 50%, rgba(255, 238, 177, 0.1), transparent 44%);
+  animation: pulse 4.2s ease-in-out infinite;
+}
+
+.ball-glow {
+  inset: 10%;
+  filter: blur(20px);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 247, 199, 0.08), transparent 24%),
+    radial-gradient(circle at 45% 58%, rgba(208, 143, 255, 0.16), transparent 30%);
+  animation: swirl 9s linear infinite;
+}
+
+.ball-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.35rem;
+  padding: 3rem;
+  text-align: center;
+  z-index: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.ball-title {
+  display: block;
+  font-size: clamp(1.45rem, 4vw, 2.1rem);
+  line-height: 1.1;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+}
+
+.ball-subtitle {
+  display: block;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  letter-spacing: 0.05rem;
+}
+
+.fortune-card {
+  position: relative;
+  z-index: 1;
+  width: min(720px, calc(100% - 2rem));
+  margin: 2rem auto 0;
+  padding: 1.4rem 1.4rem 1.5rem;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(53, 18, 49, 0.84), rgba(16, 8, 22, 0.92)),
+    radial-gradient(circle at top, rgba(255, 206, 128, 0.08), transparent 45%);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(10px);
+  transform-origin: top center;
+}
+
+.fortune-card.revealing {
+  animation: cardReveal 900ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.fortune-label {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.22rem;
+  font-size: 0.78rem;
+  color: var(--soft-gold);
+}
+
+.fortune-timeline {
+  margin: 0.85rem 0 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+}
+
+.fortune-cause {
+  margin: 0.85rem 0 0;
+  font-size: clamp(1.02rem, 2.2vw, 1.2rem);
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+
+.fortune-note {
+  margin: 1rem 0 0;
+  font-size: 0.88rem;
+  color: rgba(247, 233, 255, 0.7);
+}
+
+.stage.is-casting .crystal-ball {
+  animation: castSpell 1.25s ease;
+}
+
+.stage.is-casting {
+  animation: stageShake 600ms ease;
+}
+
+.stage.is-casting .fortune-card {
+  box-shadow:
+    0 0 0 1px rgba(255, 223, 154, 0.06),
+    0 20px 50px rgba(175, 122, 255, 0.18);
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(0.98);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes swirl {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(-2%, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, -2%, 0) scale(1.08);
+  }
+}
+
+@keyframes mistRoll {
+  0%,
+  100% {
+    transform: translateX(-2%) translateY(0);
+  }
+  50% {
+    transform: translateX(3%) translateY(2%);
+  }
+}
+
+@keyframes spinRing {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes castSpell {
+  0% {
+    transform: scale(1);
+  }
+  22% {
+    transform: scale(1.04);
+  }
+  38% {
+    transform: scale(0.98);
+  }
+  56% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes stageShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(4px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes cardReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96) rotateX(-8deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 1.5rem 0.9rem 2rem;
+    gap: 1.4rem;
+  }
+
+  .stage {
+    padding: 3rem 0.8rem 1.4rem;
+    border-radius: 26px;
+  }
+
+  .curtain {
+    width: 18%;
+  }
+
+  .fortune-card {
+    width: calc(100% - 0.4rem);
+  }
+
+  .ball-text {
+    padding: 2rem;
+  }
+
+  .ball-title {
+    font-size: clamp(1.2rem, 5.4vw, 1.7rem);
+  }
+
+  .ball-subtitle {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero h1 {
+    font-size: clamp(2.2rem, 11vw, 3.1rem);
+  }
+
+  .intro {
+    font-size: 0.96rem;
+    line-height: 1.65;
+  }
+
+  .stage {
+    padding: 2.4rem 0.6rem 1.2rem;
+  }
+
+  .curtain {
+    width: 12%;
+    opacity: 0.82;
+  }
+
+  .orbital-ring-a {
+    width: 290px;
+    height: 120px;
+  }
+
+  .orbital-ring-b {
+    width: 220px;
+    height: 220px;
+  }
+
+  .crystal-ball {
+    width: min(300px, 82vw);
+  }
+
+  .crystal-base {
+    width: 180px;
+    height: 54px;
+  }
+
+  .fortune-card {
+    margin-top: 1.6rem;
+    padding: 1.1rem 1rem 1.2rem;
+  }
+
+  .fortune-timeline {
+    font-size: clamp(1.25rem, 6vw, 1.55rem);
+  }
+
+  .fortune-cause {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
