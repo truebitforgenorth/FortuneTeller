@@ -1,3 +1,6 @@
+const landingScreen = document.getElementById("landingScreen");
+const appShell = document.getElementById("appShell");
+const enterButton = document.getElementById("enterButton");
 const stage = document.querySelector(".stage");
 const card = document.getElementById("fortuneCard");
 const button = document.getElementById("fortuneButton");
@@ -105,4 +108,21 @@ function revealFortune() {
   }, 1300);
 }
 
+function revealStage() {
+  if (landingScreen.classList.contains("is-opening")) {
+    return;
+  }
+
+  landingScreen.classList.add("is-opening");
+
+  window.setTimeout(() => {
+    appShell.classList.add("is-visible");
+  }, 500);
+
+  window.setTimeout(() => {
+    landingScreen.classList.add("is-hidden");
+  }, 1450);
+}
+
+enterButton.addEventListener("click", revealStage);
 button.addEventListener("click", revealFortune);
