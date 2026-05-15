@@ -1,11 +1,15 @@
+const splashScreen = document.getElementById("splashScreen");
 const landingScreen = document.getElementById("landingScreen");
 const appShell = document.getElementById("appShell");
 const enterButton = document.getElementById("enterButton");
+const installPanel = document.getElementById("installPanel");
+const installButton = document.getElementById("installButton");
 const stage = document.querySelector(".stage");
 const card = document.getElementById("fortuneCard");
 const button = document.getElementById("fortuneButton");
 const timelineText = document.getElementById("timelineText");
 const causeText = document.getElementById("causeText");
+let deferredInstallPrompt = null;
 
 const prophecyStyles = [
   {
@@ -174,3 +178,57 @@ function revealStage() {
 
 enterButton.addEventListener("click", revealStage);
 button.addEventListener("click", revealFortune);
+
+function hideSplashScreen() {
+  splashScreen.classList.add("is-hidden");
+  document.body.classList.remove("app-booting");
+}
+
+function showInstallPanel() {
+  if (window.matchMedia("(display-mode: standalone)").matches) {
+    return;
+  }
+
+  installPanel.hidden = false;
+}
+
+function hideInstallPanel() {
+  installPanel.hidden = true;
+}
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  showInstallPanel();
+});
+
+installButton.addEventListener("click", async () => {
+  if (!deferredInstallPrompt) {
+    return;
+  }
+
+  deferredInstallPrompt.prompt();
+  const { outcome } = await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+
+  if (outcome === "accepted") {
+    hideInstallPanel();
+  }
+});
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  hideInstallPanel();
+});
+
+window.addEventListener("load", () => {
+  window.setTimeout(hideSplashScreen, 900);
+});
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch((error) => {
+      console.error("Service worker registration failed:", error);
+    });
+  });
+}

@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "pwa-edition",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

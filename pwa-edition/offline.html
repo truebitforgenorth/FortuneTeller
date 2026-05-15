@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oracle Offline</title>
+    <meta name="theme-color" content="#140816" />
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 1.25rem;
+        font-family: "Book Antiqua", "Palatino Linotype", Palatino, Georgia, serif;
+        color: #f8f0ff;
+        background:
+          radial-gradient(circle at 50% 15%, rgba(255, 202, 127, 0.12), transparent 24%),
+          radial-gradient(circle at 20% 80%, rgba(181, 107, 255, 0.12), transparent 26%),
+          linear-gradient(180deg, #140816 0%, #09030f 45%, #040208 100%);
+      }
+
+      .offline-card {
+        width: min(560px, 100%);
+        padding: 2rem 1.25rem;
+        border-radius: 28px;
+        text-align: center;
+        background: linear-gradient(180deg, rgba(29, 12, 34, 0.82), rgba(12, 7, 18, 0.94));
+        border: 1px solid rgba(244, 220, 167, 0.16);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+      }
+
+      .eyebrow {
+        margin: 0 0 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.24rem;
+        font-size: 0.82rem;
+        color: #f4dca7;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 7vw, 3.6rem);
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      p {
+        margin: 1rem auto 0;
+        width: min(420px, 100%);
+        line-height: 1.7;
+        color: #d7c7e6;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 1.5rem;
+      }
+
+      a,
+      button {
+        border: 1px solid rgba(244, 220, 167, 0.34);
+        border-radius: 999px;
+        padding: 0.9rem 1.3rem;
+        background: linear-gradient(180deg, rgba(120, 29, 55, 0.94), rgba(58, 12, 27, 0.96));
+        color: #f8f0ff;
+        text-decoration: none;
+        font: inherit;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="offline-card">
+      <p class="eyebrow">The Veil Has Dropped</p>
+      <h1>Oracle Offline</h1>
+      <p>
+        The spirits have lost the signal. Reconnect to summon a fresh reading, or
+        return to the cached oracle when the network steadies.
+      </p>
+      <div class="actions">
+        <button type="button" onclick="window.location.reload()">Try Again</button>
+        <a href="./index.html">Return To The Oracle</a>
+      </div>
+    </main>
+  </body>
+</html>
